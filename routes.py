@@ -28,7 +28,7 @@ def enroll(course_id):
     existing_enrollment = Enrollment.query.filter_by(user_id=user.id, course_id=course_id).first()
     if existing_enrollment:
         flash('You are already enrolled in this course.')
-        return redirect(url_for('course_bp.courses', course_id=course_id))
+        return redirect(url_for('course_bp.courses'))
 
     # Add enrollment if not already enrolled
     new_enrollment = Enrollment(user_id=user.id, course_id=course_id)

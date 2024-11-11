@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
+from models import db, User  # Import the User model
+from routes import course_bp  # Import the blueprint
+import os
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -7,20 +10,16 @@ app = Flask(__name__)
 # Configure database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SECRET_KEY'] = 'your_secret_key'  # For session management, flashing messages
+db.init_app(app)
 
-# Initialize the database
-db = SQLAlchemy(app)
-
-# Define User model
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(150), nullable=False, unique=True)
-    email = db.Column(db.String(150), nullable=False, unique=True)
-    password = db.Column(db.String(150), nullable=False)
-
-# Create the database (Run this only once to initialize the database)
+# Create the database file if it doesn't exist
 with app.app_context():
-    db.create_all()
+    if not os.path.exists('users.db'):
+        db.create_all()
+        print("Database created successfully!")
+
+# Register the blueprint
+app.register_blueprint(course_bp)
 
 # Route for the signup/signin page
 @app.route('/')
@@ -86,6 +85,13 @@ def logout():
     session.clear()  # Clear the session
     flash('You have been logged out.')
     return redirect(url_for('index'))
+
+@app.after_request
+def add_cache_control_header(response):
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True)

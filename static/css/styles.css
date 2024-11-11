@@ -1,0 +1,120 @@
+/* Basic Reset */
+body, h1, h2, p, ul, li, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-bottom: 2px solid #228B22; /* Forest Green */
+}
+
+.header .profile-pic img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.header .edit-btn {
+    background-color: #228B22; /* Forest Green */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.header .name {
+    font-size: 2em;
+    color: #228B22; /* Forest Green */
+}
+
+.header .role {
+    font-size: 1.2em;
+}
+
+section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+h2 {
+    border-bottom: 2px solid #228B22; /* Forest Green */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    color: #228B22; /* Forest Green */
+}
+
+button {
+    background-color: #228B22; /* Forest Green */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #1d6a1d; /* Darker Green */
+}
+
+a {
+    color: #228B22; /* Forest Green */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-top: 2px solid #228B22; /* Forest Green */
+}
+
+.footer-btn {
+    background-color: #228B22; /* Forest Green */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.footer-btn:hover {
+    background-color: #1d6a1d; /* Darker Green */
+}
+
+.footer p {
+    margin-top: 10px;
+}

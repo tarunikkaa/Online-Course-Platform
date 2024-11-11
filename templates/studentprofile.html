@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile Page</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1 class="name" id="profileName">{{ username }}</h1>
+            <p class="role">Role: Student</p>
+        </header>
+
+        <!-- Personal Information -->
+        <section class="personal-info">
+            <h2>Personal Information</h2>
+            <p>Email: <span id="email">{{ email }}</span></p>
+        </section>
+
+        <!-- Account Settings -->
+        <section class="account-settings">
+            <h2>Account Settings</h2>
+            <button class="settings-btn">Edit Profile</button>
+            <button class="settings-btn">Change Password</button>
+            <button class="settings-btn">Notification Preferences</button>
+            <button class="settings-btn">Privacy Settings</button>
+        </section>
+
+        <!-- Activity Overview -->
+        <section class="activity-overview">
+            <h2>Activity Overview</h2>
+            <div class="activity">
+                <p>Recent Activity:</p>
+                <ul>
+                    <li>Enrolled in "Math 101"</li>
+                    <li>Submitted "Homework 2"</li>
+                    <li>New message from Professor Smith</li>
+                </ul>
+            </div>
+            <div class="events">
+                <p>Upcoming Events:</p>
+                <ul>
+                    <li>Math 101 Midterm on Oct 5</li>
+                    <li>Project Deadline on Oct 15</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Course Information -->
+        <section class="course-info">
+            <h2>Course Information</h2>
+            <div class="courses">
+                <p>Enrolled Courses:</p>
+                <ul>
+                    <li>Math 101 [75% Complete]</li>
+                    <li>History 202 [50% Complete]</li>
+                </ul>
+            </div>
+            <div class="materials">
+                <p>Course Materials:</p>
+                <ul>
+                    <li><a href="#">Access to Math 101 Lectures</a></li>
+                    <li><a href="#">Download History 202 Readings</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Assignments and Grades -->
+        <section class="assignments-grades">
+            <h2>Assignments and Grades</h2>
+            <div class="assignments">
+                <p>Assignments:</p>
+                <ul>
+                    <li>Homework 2: Submitted</li>
+                    <li>Quiz 1: Pending (Due Oct 10)</li>
+                </ul>
+            </div>
+            <div class="grades">
+                <p>Grades:</p>
+                <ul>
+                    <li>Math 101: A</li>
+                    <li>History 202: B+</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Achievements and Certificates -->
+        <section class="achievements-certificates">
+            <h2>Achievements and Certificates</h2>
+            <div class="certificates">
+                <p>Certificates Earned:</p>
+                <ul>
+                    <li>Math 101 Completion</li>
+                    <li>History 202 Completion</li>
+                </ul>
+            </div>
+            <div class="achievements">
+                <p>Achievements:</p>
+                <ul>
+                    <li>Perfect Attendance in Math 101</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Communication -->
+        <section class="communication">
+            <h2>Communication</h2>
+            <div class="messages">
+                <p>Messages:</p>
+                <button class="comm-btn">Inbox</button>
+                <button class="comm-btn">Sent Items</button>
+                <button class="comm-btn">Compose New Message</button>
+            </div>
+            <div class="forums">
+                <p>Discussion Forums:</p>
+                <button class="comm-btn">View Threads</button>
+            </div>
+        </section>
+
+        <!-- Support and Help -->
+        <section class="support-help">
+            <h2>Support and Help</h2>
+            <div class="help-resources">
+                <p>Help Resources:</p>
+                <button class="support-btn">FAQs</button>
+                <button class="support-btn">Help Articles</button>
+                <button class="support-btn">Guides</button>
+            </div>
+            <div class="support-tickets">
+                <p>Support Tickets:</p>
+                <button class="support-btn">View and Manage Tickets</button>
+            </div>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="footer">
+            <a href="{{ url_for('logout') }}" class="footer-btn">Log Out</a>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </footer>
+    </div>
+</body>
+</html>

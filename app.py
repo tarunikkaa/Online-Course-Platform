@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
-from models import db, User  # Import the User model
+from models import db, User, Course, Enrollment, Progress  # Import the Course, Enrollment, and Progress models
 from routes import course_bp  # Import the blueprint
 import os
 
@@ -69,13 +69,30 @@ def signin():
             flash('Invalid username or password. Please try again.')
             return redirect(url_for('index'))
 
-# Route for student profile
 @app.route('/studentprofile')
 def student_profile():
     if 'username' in session and 'email' in session:
-        username = session['username']
-        email = session['email']
-        return render_template('studentprofile.html', username=username, email=email)
+        user = User.query.filter_by(username=session['username']).first()
+        
+        # Fetch enrolled courses and progress
+        enrolled_courses = db.session.query(Course, Progress).join(Progress).filter(
+            Progress.user_id == user.id
+        ).all()
+
+        # Structure the data to be used in the template
+        courses_data = [{'id': course.id, 'title': course.title, 'progress': progress.completed_lessons}
+                        for course, progress in enrolled_courses]
+
+        # Sample recent activities and upcoming events
+        recent_activities = ["Enrolled in 'Math 101'", "Submitted 'Homework 2'"]
+        upcoming_events = ["Math 101 Midterm on Oct 5", "Project Deadline on Oct 15"]
+
+        return render_template('studentprofile.html', 
+                               username=user.username, 
+                               email=user.email, 
+                               enrolled_courses=courses_data,
+                               recent_activities=recent_activities,
+                               upcoming_events=upcoming_events)
     else:
         flash('Please sign in to view your profile.')
         return redirect(url_for('index'))

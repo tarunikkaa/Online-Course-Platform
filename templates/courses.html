@@ -26,14 +26,6 @@
                 flashMessages.style.display = 'none';
             }
         }, 3000); // 3 seconds
-
-        // Open login modal automatically if login_failed is in the URL
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('login_failed')) {
-                openModal(); // Function to open login modal
-            }
-        });
     </script>
     <div class="container mt-5">
         <h1 class="mb-4">Available Courses</h1>

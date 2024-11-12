@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, session
 from models import db, User, Course, Enrollment, Progress
+from sqlalchemy.orm import joinedload
 
 # Create a blueprint
 course_bp = Blueprint('course_bp', __name__)
@@ -54,6 +55,41 @@ def track_progress(course_id):
     else:
         flash('Please sign in to view your progress.')
         return redirect(url_for('index'))
+    
+@course_bp.route('/course/<int:course_id>')
+def course_details(course_id):
+    course = Course.query.get_or_404(course_id)
+    return render_template('course_details.html', course=course)
+
+@course_bp.route('/unenroll/<int:course_id>', methods=['POST'])
+def unenroll(course_id):
+    # Ensure the user is logged in
+    if 'username' not in session:
+        flash('Please log in to unenroll from a course.')
+        return redirect(url_for('index'))
+
+    user = User.query.filter_by(username=session['username']).first()
+    if not user:
+        flash('User not found. Please log in again.')
+        return redirect(url_for('index'))
+
+    # Find the enrollment record and eagerly load the associated course
+    enrollment = Enrollment.query.filter_by(user_id=user.id, course_id=course_id).options(joinedload(Enrollment.course)).first()
+    if not enrollment:
+        flash('You are not enrolled in this course.')
+        return redirect(url_for('student_profile'))
+
+    # Remove the enrollment and associated progress
+    progress = Progress.query.filter_by(user_id=user.id, course_id=course_id).first()
+    if progress:
+        db.session.delete(progress)
+
+    db.session.delete(enrollment)
+    db.session.commit()
+
+    # Now you can safely access enrollment.course.title
+    flash(f'You have successfully unenrolled from {enrollment.course.title}.')
+    return redirect(url_for('student_profile'))
     
 @course_bp.route('/add-sample-data')
 def add_sample_data():
